@@ -18,7 +18,7 @@
 
 ## :chart_with_upwards_trend: Diagrama do projeto
 
-<div align="center"> <img src="https://github.com/walterowisk/CRUD-APIGateway-Lambda-DynamoDB/blob/main/img/aws-diagram.png" alt="AWS Diagram" width="600"> </div>
+<div align="center"> <img src="https://github.com/walterowisk/labProject-api-security-cognito-AWS/blob/main/img/lab-project-cognito-diagram.jpg" alt="AWS Diagram" width="600"> </div>
 
 ## :cloud: Serviços AWS neste projeto
 
@@ -155,6 +155,10 @@ A maior parte das configurações envolvendo política de segurança podem varia
 - **Scope** `email openid`
 - **Client Authentication** `Send clients credentials in body`
 - :point_right: **_Get New Access Token_**
+
+<div align="center"> <img src="https://github.com/walterowisk/labProject-api-security-cognito-AWS/blob/main/img/cognito-login.png" width="600">
+</div>
+
 - Vai abrir a tela de login/cadastro. Aproveite e faça um cadastro (Sign up) para testar as políticas definidas no Cognito.
 - Após cadastrar e fazer a verificação por e-mail faça o login na conta pela mesma tela (só que na opção Sign in).
 - Se der tudo certo _(Your registration has been confirmed!)_ a tela do Postman vai exibir a mensagem _Authentication complete_ :point_right: **_Proceed_**
