@@ -37,34 +37,33 @@ Todas as etapas deste projeto foram feitas diretamente no AWS Management Console
 
 > Todos os nomes `marcados como código` foram dados por mim e, portanto, ficam a critério de quem estiver reproduzindo o projeto.
 
-Sem mais enrolação, let's go!!
-
 ### 1. Criando uma API REST no API Gateway
 
 - Entrar na tela do API Gateway e clicar em **_Create API_**
 - Em **Choose an API type** :arrow_right: **_REST API_** :arrow_right: **_Build_**
 - Em **Choose the protocol** marque **_REST_** e em **Create new API** selecione **_New API_**
-- No campo **API name** inserir `lab-cognito-api` :arrow_right: **_Next_**
-- Em **Endpoint Type** selecione **_Regional_** :arrow_right: **_Create API_**
-- Na tela de resources clique em **_Actions_** :arrow_right: **_Create Resource_** :arrow_right: **Resource name:** `items` :arrow_right: **_Create resource_**
-  > :exclamation: O método para este recurso será criado mais adiante.
+- No campo **API name** inserir `lab-cognito-api`:point_right: **_Next_**
+- Em **Endpoint Type** selecione **_Regional_** :point_right: **_Create API_**
+- Na tela de resources clique em **_Actions_** :arrow_right: **_Create Resource_** :arrow_right: **Resource name:** `items` :point_right: **_Create resource_**
+
+> :exclamation: O método para este recurso será criado mais adiante.
 
 ### 2. Criando a tabela no DynamoDB
 
-- Na tela principal do serviço clicar em **_Create Table_**
+- Na tela principal do serviço clicar em :point_right: **_Create Table_**
 - Em **Table name** inserir `lab-cognito-table`
 - Em **Partition key** inserir a chave `id` e deixar o tipo **_string_**
-- Rolar a página até o final e clicar em **_Create table_**
+- Rolar a página até o final e clicar em :point_right: **_Create table_**
 
 ### 3. Criando função Lambda
 
-- Dentro do console do Lambda clicar em **_Create function_**
+- Dentro do console do Lambda clicar em :point_right: **_Create function_**
 - Deixar selecionada a opção **_Author from scratch_** para criar uma função do zero
 - Em **Function name** inserir `lab-cognito-putItemFunction`
 - Em **Runtime** selecionar **_Node.js_** na versão de sua preferência
-- Deixar a opção Architecture em **_x86_64_** :arrow_right: **_Create function_**
+- Deixar a opção Architecture em **_x86_64_** :point_right: **_Create function_**
 - No editor de código abaixo de **Code source** inserir o conteúdo de _putItemFunction.js_ que está neste repositório
-- Depois de colar o código da função clicar em **_Deploy_**
+- Depois de colar o código da função clicar em :point_right: **_Deploy_**
 
 > :exclamation: Caso utilize o arquivo `putItemFunction.js` deste repositório não esqueça verificar se precisa ajustar o nome da tabela.
 
@@ -76,7 +75,7 @@ Dentro do recurso criado será necessário configurar o **IAM** para que possa i
 - Na caixa de pesquisa digite `dynamodb` e selecione o serviço
 - Na caixa de pesquisa de **Actions** digite a ação `putitem` e marque a caixa permitindo a ação
 - Logo abaixo em **Resources** deixe marcado **_Specific_** e clique em **_Add ARN_**
-- Na tela que abirá em pop-up insira o _ARN_ da tabela criada anteriormente no **DynamoDB** :arrow_right: **_Add_** :arrow_right: **_Review policy_** inserir nome `putitem-policy` :arrow_right: **_Create policy_**
+- Na tela que abirá em pop-up insira o _ARN_ da tabela criada anteriormente no **DynamoDB** :arrow_right: **_Add_** :arrow_right: **_Review policy_** inserir nome `putitem-policy` :point_right:**_Create policy_**
   > :exclamation: ARN (Amazon Resource Name) é um identificador único de cada recurso criado na AWS.
 
 Agora a função Lambda conseguirá interagir com o banco de dados mas só com a função de inserção de items _(put item)_.
@@ -91,8 +90,8 @@ Agora a função Lambda conseguirá interagir com o banco de dados mas só com a
 - **Lambda Function** `lab-cognito-putItemFunction` (O nome da função Lambda)
 - **Use Default Timeout** :white_check_mark:
 - :arrow_right: **_Save_** :arrow_right: **_OK_**
-- Seleciona o método **_POST_** :arrow_right: **_Actions_** :arrow_right: **_Deploy API_** :arrow_right:
-- **Deployment stage** **_[New Stage]_** :arrow_right: **Stage name\*** `dev` :arrow_right: **_Deploy_**
+- Seleciona o método **_POST_** :arrow_right: **_Actions_** :point_right: **_Deploy API_** :arrow_right:
+- **Deployment stage** **_[New Stage]_** :arrow_right: **Stage name\*** `dev` :point_right: **_Deploy_**
 
 ### 5. Teste no Postman
 
@@ -114,8 +113,13 @@ Após o teste esses dados devem aparecer na tabela do DynamoDB.
 A maior parte das configurações envolvendo política de segurança podem variar de acordo com a necessidade e o gosto de quem está configurando. Os meus parâmetros foram os seguintes:
 
 - Na tela inicial do **Cognito** :point_right: **_Create user pool_**
+- **Step 1 of 6: Configure sign-in experience**
 - **Authentication providers** :point_right: :ballot_box_with_check: **_Cognito user pool_**
 - **Cognito user pool sign-in options** :white_check_mark: **_Email_** :point_right: **_Next_**
+
+---
+
+- **Step 2 of 6: Configure security requirements**
 - **Password policy** :point_right: :radio_button: **_Custom_**
 - **Password minimum length** `8`
 - [x] Contains at least 1 number
@@ -125,13 +129,28 @@ A maior parte das configurações envolvendo política de segurança podem varia
 - **Multi-factor authentication** :point_right: :radio_button: **_No MFA_**
 - **User account recovery** :point_right: :ballot_box_with_check: **_Enable self-service account recovery - Recommended_**
 - **Delivery method for user account recovery messages** :point_right: :radio_button: **_Email only_** :point_right: **_Next_**
-- **Configure sign-up experience** :point_right: :ballot_box_with_check: **_Enable self-registration_**
+
+---
+
+- **Step 3 of 6: Configure sign-up experience**
+- **Self-service sign-up** :point_right: :ballot_box_with_check: **_Enable self-registration_**
 - **Cognito-assisted verification and confirmation** :point_right: :ballot_box_with_check: **_Allow Cognito to automatically send messages to verify and confirm - Recommended_**
-- :point_right: :radio_button: **_Send email message, verify email address_**
+- **Attributes to verify** :point_right: :radio_button: **_Send email message, verify email address_**
 - **Verifying attribute changes** :point_right: :ballot_box_with_check: **_Keep original attribute value active when an update is pending - Recommended_**
-- **Active attribute values when an update is pending** :point_right: :radio_button: **_Email address_** :point_right: **_Next_**
-- **Configure message delivery** :point_right: :radio_button: **_Send email with Cognito_** :point_right: **_Next_**
-- **Integrate your app** :point_right: **User pool name** `lab-cognito-userPool`
+- **Active attribute values when an update is pending** :point_right: :radio_button: **_Email address_**
+- :point_right: **_Next_**
+
+---
+
+- **Step 4 of 6: Configure message delivery**
+- :point_right: :radio_button: **_Send email with Cognito_**
+- **FROM email address** `no-reply@verificationemail.com`
+- :point_right: **_Next_**
+
+---
+
+- **Step 5 of 6: Integrate your app**
+- :point_right: **User pool name** `lab-cognito-userPool`
 - **Hosted authentication pages** :point_right: :ballot_box_with_check: **Use the Cognito Hosted UI**
 - **Domain** :point_right: :radio_button: **_Use a Cognito domain_**
 - **Cognito domain** `https://lab-bootcamp` .auth.us-east-1.amazoncognito.com
@@ -139,10 +158,21 @@ A maior parte das configurações envolvendo política de segurança podem varia
 - **App client name** `lab-cognito-appClient`
 - **Client secret** :point_right: :radio_button: **_Don't generate a client secret_**
 - **Allowed callback URLs** :arrow_right: **URL** `https://example.com/`
-- **Advanced app client settings** (Deixa os valores padrão)
-- **Attribute read and write permissions:** **_name_** :ballot_box_with_check: **_Read_** :ballot_box_with_check: **_Write_**
+- **Advanced app client settings** (Deixarei os valores padrão, veja se sua necessidade é outra)
+- **OAuth 2.0 grant types:** (marque os tipos abaixo)
+- [x] Implicit grant
+- [x] Authorization code grant
+- **OpenID Connect scopes:** (marque os valores abaixo)
+- [x] Email
+- [x] OpenID
+- **Attribute read and write permissions:**
+- **Attribute:** **_name_** :ballot_box_with_check: **_Read_** :ballot_box_with_check: **_Write_**
 - :point_right: **_Next_**
-- **Review and create** :point_right: **_Create user pool_**
+
+---
+
+- **Step 6 of 6: Review and create**
+- :point_right: **_Create user pool_**
 
 ### 7. Criando request de login no Postman
 
@@ -190,9 +220,15 @@ Agora vamos atrelar o user pool do cognito com a API criada neste projeto.
   }
 
 - Na opção **Authorization** :arrow_right: **Type** `Bearer Token` :arrow_right: **Token** `cola o Token ID que foi copiado` :point_right: **_Send_**
+  ***
+  Se a resposta da request for `'Item inserido com sucesso!'` significa que a API aceitou a autenticação do seu usuário criado no Cognito.
 
-Se a resposta da request for `'Item inserido com sucesso!'`significa que a API aceitou a autenticação do seu usuário criado no Cognito.
+Para ter certeza que a API comunicou com o banco entre no DynamoDB e confira se a tabela exibe as informações enviadas acima.
 
-Para ter certeza que a API comunicou com o banco entre no DynamoDB e confira se a tabela exibe as informações enviadas acima
+Caso todos os testes tenham ocorrido com sucesso podemos concluir que o Cognito está gerenciando a autenticação e a autorização da nossa aplicação. Essas são apenas algumas funções que este serviço é capaz de prover
+
+A partir desses conceitos podemos utilizar esses recursos em projetos maiores que eventualmente possam entrar em produção.
+
+Para entender mais a fundo leia a [**Documentação do Amazon Cognito**](https://docs.aws.amazon.com/pt_br/cognito/index.html)
 
 > :bulb: Importante: Não esquecer de excluir os recursos criados para evitar cobranças desnecessárias da AWS.
