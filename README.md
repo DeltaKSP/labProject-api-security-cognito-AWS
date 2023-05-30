@@ -1,6 +1,6 @@
-## :closed_lock_with_key: Adicionando Segurança em APIs na AWS com Amazon Cognito
+##  Adicionando Segurança em APIs na AWS com Amazon Cognito
 
-## :wrench: Ferramentas que utilizei
+##Ferramentas que utilizei
 
 <div align="center"> 
 <img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="Git badge"/>
@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github Badge"/> 
 </div>
 
-## :chart_with_upwards_trend: Diagrama do projeto
+##  Diagrama do projeto
 
 <div align="center"> <img src="https://github.com/walterowisk/labProject-api-security-cognito-AWS/blob/main/img/lab-project-cognito-diagram.jpg" alt="AWS Diagram" width="600"> </div>
 
@@ -22,7 +22,7 @@
 - **LAMBDA:** Serviço de computação sem servidor e orientado a eventos que permite executar código para praticamente qualquer tipo de aplicação ou serviço de backend sem provisionar ou gerenciar servidores. [Saiba mais.](https://aws.amazon.com/pt/lambda/)
 - **DYNAMODB:** Banco de dados de chave-valor NoSQL, sem servidor e totalmente gerenciado, projetado para executar aplicações de alta performance em qualquer escala. [Saiba mais.](https://aws.amazon.com/pt/dynamodb/)
 
-## :page_facing_up: Descrição do desafio de projeto
+##  Descrição do desafio de projeto
 
 Oferecer autenticação, autorização e gerenciamento de usuários para suas aplicações Web e Mobile com o Amazon Cognito. Esse serviço, totalmente gerenciado pela AWS, suporta os principais mecanismos de segurança do mercado, além da integração com terceiros, como Facebook, Google, Apple ou a própria Amazon.
 
